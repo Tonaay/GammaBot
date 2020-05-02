@@ -25,21 +25,25 @@ namespace GammaBot.Bots
 
         protected override async Task OnMessageActivityAsync(ITurnContext<IMessageActivity> turnContext, CancellationToken cancellationToken)
         {
-            if (string.Equals(turnContext.Activity.Text, "wait", System.StringComparison.InvariantCultureIgnoreCase))
-            {
-                await turnContext.SendActivitiesAsync(
-                    new Activity[] {
-                new Activity { Type = ActivityTypes.Typing },
-                new Activity { Type = "delay", Value= 3000 },
-                MessageFactory.Text("Finished typing", "Finished typing"),
-                    },
-                    cancellationToken);
-            }
-            else
-            {
-                var replyText = $"Echo: {turnContext.Activity.Text}. Say 'wait' to watch me type.";
-                await turnContext.SendActivityAsync(MessageFactory.Text(replyText, replyText), cancellationToken);
-            }
+            
+            var menuSelection = (string.Equals(turnContext.Activity.Text, "wait", System.StringComparison.InvariantCultureIgnoreCase));
+
+
+            //if (string.Equals(turnContext.Activity.Text, "wait", System.StringComparison.InvariantCultureIgnoreCase))
+            //{
+            //    await turnContext.SendActivitiesAsync(
+            //        new Activity[] {
+            //    new Activity { Type = ActivityTypes.Typing },
+            //    new Activity { Type = "delay", Value= 3000 },
+            //    MessageFactory.Text("Finished typing", "Finished typing"),
+            //        },
+            //        cancellationToken);
+            //}
+            //else
+            //{
+            //    var replyText = $"Echo: {turnContext.Activity.Text}. Say 'wait' to watch me type.";
+            //    await turnContext.SendActivityAsync(MessageFactory.Text(replyText, replyText), cancellationToken);
+            //}
         }
 
         private static async Task SendWelcomeMessageAsync(ITurnContext turnContext, CancellationToken cancellationToken)
