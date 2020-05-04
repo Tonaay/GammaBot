@@ -9,7 +9,5 @@ namespace GammaBot
     {
         public string Name { get; set; }
         public string Team { get; set; }
-
-        public List<string> InternalSystems { get; set; } = new List<string>();
     }
 }

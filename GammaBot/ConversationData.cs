@@ -11,6 +11,8 @@ namespace GammaBot
 
         public string ChannelId { get; set; }
 
-        public bool PropmtedUserForName { get; set; } = false;
+        public bool PromptedUserForName { get; set; } = false;
+
+        public string DialogState { get; set; }
     }
 }

@@ -12,13 +12,12 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
 using GammaBot.Bots;
+using GammaBot.Dialogs;
 
 namespace GammaBot
 {
     public class Startup
     {
-
-        
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
@@ -35,9 +34,22 @@ namespace GammaBot
             services.AddSingleton<IBotFrameworkHttpAdapter, AdapterWithErrorHandler>();
 
             // Create the bot as a transient. In this case the ASP Controller is expecting an IBot.
-            services.AddTransient<IBot, SupportBot>();
+            services.AddTransient<IBot, SupportBot<MenuDialog>>();
 
+            //-------------------------------------------------------------------
 
+            //// Create the storage we'll be using for User and Conversation state. (Memory is great for testing purposes.)
+            //services.AddSingleton<IStorage, MemoryStorage>();
+
+            //// Create the User state. (Used in this bot's Dialog implementation.)
+            //services.AddSingleton<UserState>();
+
+            //// Create the Conversation state. (Used by the Dialog system itself.)
+            //services.AddSingleton<ConversationState>();
+
+            //-------------------------------------------------------------------
+
+            //Previous configuration for states
 
             var storage = new MemoryStorage();
 
@@ -45,9 +57,21 @@ namespace GammaBot
             var userState = new UserState(storage);
             services.AddSingleton(userState);
 
-            // Create the COnversation state passing in the storage layer
+            // Create the Conversation state passing in the storage layer
             var conversationState = new ConversationState(storage);
             services.AddSingleton(conversationState);
+
+            services.AddSingleton<MenuDialog>();
+
+            services.AddSingleton<SupportGlossaryDialog>();
+
+            services.AddSingleton<SupportProcessesDialog>();
+
+            services.AddSingleton<SupportRotaDialog>();
+
+            services.AddSingleton<TicketingDialog>();
+
+            services.AddSingleton<FeedbackDialog>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
