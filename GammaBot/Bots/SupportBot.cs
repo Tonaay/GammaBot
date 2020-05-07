@@ -14,17 +14,18 @@ using Microsoft.Bot.Schema;
 
 namespace GammaBot.Bots
 {
-    public class SupportBot<T> : ActivityHandler where T : Dialog
+    public class SupportBot : ActivityHandler
     {
         private BotState _conversationState;
         private BotState _userState;
-        private Dialog _dialog;
 
-        public SupportBot(ConversationState conversationState, UserState userState, Dialog dialog)
+
+        public SupportBot(ConversationState conversationState, UserState userState)
         {
+            
             _conversationState = conversationState;
             _userState = userState;
-            _dialog = dialog;
+
         }
 
         public override async Task OnTurnAsync(ITurnContext turnContext, CancellationToken cancellationToken = default(CancellationToken))
@@ -38,7 +39,6 @@ namespace GammaBot.Bots
 
         protected override async Task OnMessageActivityAsync(ITurnContext<IMessageActivity> turnContext, CancellationToken cancellationToken)
         {
-            await base.OnTurnAsync(turnContext, cancellationToken);
             // Setting up Conversation State Data
             var conversationStateAccessors = _conversationState.CreateProperty<ConversationData>(nameof(ConversationData));
             var conversationData = await conversationStateAccessors.GetAsync(turnContext, () => new ConversationData());
@@ -58,6 +58,7 @@ namespace GammaBot.Bots
                     // Acknowledge that we got their name.
                     await turnContext.SendActivityAsync($"Nice to meet you {userProfile.Name}!");
                     // Reset the flag to allow the bot to go through the cycle again.
+                    await SendMenuOptionsAsync(turnContext, cancellationToken);
                     conversationData.PromptedUserForName = false;
                 }
                 else
@@ -117,7 +118,6 @@ namespace GammaBot.Bots
                 if (member.Id != turnContext.Activity.Recipient.Id)
                 {
                     await turnContext.SendActivityAsync($"Hi there, I'm the Gamma Chatbot.", cancellationToken: cancellationToken);
-                    await SendMenuOptionsAsync(turnContext, cancellationToken);
                 }
             }
         }
@@ -143,6 +143,7 @@ namespace GammaBot.Bots
                     new Activity[] {
                 new Activity { Type = ActivityTypes.Typing },
                 new Activity { Type = "delay", Value= 2000 },
+                menuPrompt,
                     },
                     cancellationToken);
         }

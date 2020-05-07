@@ -11,10 +11,9 @@ using Microsoft.Bot.Builder.Integration.AspNet.Core;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
-using GammaBot.Bots;
-using GammaBot.Dialogs;
+using TestBot.Bots;
 
-namespace GammaBot
+namespace TestBot
 {
     public class Startup
     {
@@ -34,33 +33,7 @@ namespace GammaBot
             services.AddSingleton<IBotFrameworkHttpAdapter, AdapterWithErrorHandler>();
 
             // Create the bot as a transient. In this case the ASP Controller is expecting an IBot.
-            services.AddTransient<IBot, SupportBot>();
-
-            //-------------------------------------------------------------------
-
-            //// Create the storage we'll be using for User and Conversation state. (Memory is great for testing purposes.)
-            //services.AddSingleton<IStorage, MemoryStorage>();
-
-            //// Create the User state. (Used in this bot's Dialog implementation.)
-            //services.AddSingleton<UserState>();
-
-            //// Create the Conversation state. (Used by the Dialog system itself.)
-            //services.AddSingleton<ConversationState>();
-
-            //-------------------------------------------------------------------
-
-            //Previous configuration for states
-
-            var storage = new MemoryStorage();
-
-            // Create the User state passing in the storage layer
-            var userState = new UserState(storage);
-            services.AddSingleton(userState);
-
-            // Create the Conversation state passing in the storage layer
-            var conversationState = new ConversationState(storage);
-            services.AddSingleton(conversationState);
-
+            services.AddTransient<IBot, EchoBot>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
