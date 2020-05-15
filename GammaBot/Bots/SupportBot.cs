@@ -81,7 +81,7 @@ namespace GammaBot.Bots
                 {
                     case "telecom glossary":
                         await turnContext.SendActivityAsync($"You chose Telecom Glossary.");
-                        break;
+                        break;  
                     case "system support":
                         await turnContext.SendActivityAsync($"You chose System Support.");
                         break;
