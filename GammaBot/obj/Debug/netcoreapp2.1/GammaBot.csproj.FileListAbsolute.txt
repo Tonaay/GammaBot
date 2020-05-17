@@ -35,3 +35,18 @@ C:\Users\User1\Documents\GitHub\GammaBot\GammaBot\obj\Debug\netcoreapp2.1\GammaB
 C:\Users\User1\Documents\GitHub\GammaBot\GammaBot\obj\Debug\netcoreapp2.1\GammaBot.dll
 C:\Users\User1\Documents\GitHub\GammaBot\GammaBot\obj\Debug\netcoreapp2.1\GammaBot.pdb
 C:\Users\User1\Documents\GitHub\GammaBot\GammaBot\obj\Debug\netcoreapp2.1\GammaBot.genruntimeconfig.cache
+D:\Software Development\GitHub\GammaBot\GammaBot\bin\Debug\netcoreapp2.1\appsettings.json
+D:\Software Development\GitHub\GammaBot\GammaBot\bin\Debug\netcoreapp2.1\GammaBot.deps.json
+D:\Software Development\GitHub\GammaBot\GammaBot\bin\Debug\netcoreapp2.1\GammaBot.runtimeconfig.json
+D:\Software Development\GitHub\GammaBot\GammaBot\bin\Debug\netcoreapp2.1\GammaBot.runtimeconfig.dev.json
+D:\Software Development\GitHub\GammaBot\GammaBot\bin\Debug\netcoreapp2.1\GammaBot.dll
+D:\Software Development\GitHub\GammaBot\GammaBot\bin\Debug\netcoreapp2.1\GammaBot.pdb
+D:\Software Development\GitHub\GammaBot\GammaBot\obj\Debug\netcoreapp2.1\GammaBot.csprojAssemblyReference.cache
+D:\Software Development\GitHub\GammaBot\GammaBot\obj\Debug\netcoreapp2.1\GammaBot.csproj.CoreCompileInputs.cache
+D:\Software Development\GitHub\GammaBot\GammaBot\obj\Debug\netcoreapp2.1\GammaBot.RazorAssemblyInfo.cache
+D:\Software Development\GitHub\GammaBot\GammaBot\obj\Debug\netcoreapp2.1\GammaBot.RazorAssemblyInfo.cs
+D:\Software Development\GitHub\GammaBot\GammaBot\obj\Debug\netcoreapp2.1\GammaBot.AssemblyInfoInputs.cache
+D:\Software Development\GitHub\GammaBot\GammaBot\obj\Debug\netcoreapp2.1\GammaBot.AssemblyInfo.cs
+D:\Software Development\GitHub\GammaBot\GammaBot\obj\Debug\netcoreapp2.1\GammaBot.RazorTargetAssemblyInfo.cache
+D:\Software Development\GitHub\GammaBot\GammaBot\obj\Debug\netcoreapp2.1\GammaBot.dll
+D:\Software Development\GitHub\GammaBot\GammaBot\obj\Debug\netcoreapp2.1\GammaBot.pdb

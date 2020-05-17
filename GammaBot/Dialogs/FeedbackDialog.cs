@@ -6,20 +6,20 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
-
 namespace GammaBot.Dialogs
 {
-    public class SupportGlossaryDialog : ComponentDialog
+    public class FeedbackDialog : ComponentDialog
     {
 
-        public SupportGlossaryDialog() : base(nameof(SupportGlossaryDialog)){
+        public FeedbackDialog() : base(nameof(FeedbackDialog))
+        {
 
             // This array defines how the Waterfall will execute.
             var waterfallSteps = new WaterfallStep[]
             {
-                QuestionStepAsync,
-                ResponseStepAsync,
-                SummaryStepAsync,
+                RatingStepAsync,
+                NoteStepAsync,
+                FinalStepAsync,
             };
 
             // The initial child Dialog to run.
@@ -27,23 +27,24 @@ namespace GammaBot.Dialogs
 
         }
 
-        private static async Task<DialogTurnResult> QuestionStepAsync(WaterfallStepContext stepContext, CancellationToken cancellationToken)
+        private static async Task<DialogTurnResult> RatingStepAsync(WaterfallStepContext stepContext, CancellationToken cancellationToken)
         {
             return await stepContext.NextAsync(stepContext, cancellationToken);
 
         }
 
-        private static async Task<DialogTurnResult> ResponseStepAsync(WaterfallStepContext stepContext, CancellationToken cancellationToken)
+        private static async Task<DialogTurnResult> NoteStepAsync(WaterfallStepContext stepContext, CancellationToken cancellationToken)
         {
 
             return await stepContext.NextAsync(stepContext, cancellationToken);
         }
 
 
-        private static async Task<DialogTurnResult> SummaryStepAsync(WaterfallStepContext stepContext, CancellationToken cancellationToken)
+        private static async Task<DialogTurnResult> FinalStepAsync(WaterfallStepContext stepContext, CancellationToken cancellationToken)
         {
 
             return await stepContext.EndDialogAsync(cancellationToken: cancellationToken);
         }
     }
+}
 }

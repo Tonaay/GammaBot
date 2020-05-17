@@ -14,18 +14,18 @@ using Microsoft.Bot.Schema;
 
 namespace GammaBot.Bots
 {
-    public class SupportBot : ActivityHandler
+    public class SupportBot<T> : ActivityHandler where T : Dialog
     {
         private BotState _conversationState;
         private BotState _userState;
+        protected readonly Dialog Dialog;
 
-
-        public SupportBot(ConversationState conversationState, UserState userState)
+        public SupportBot(ConversationState conversationState, UserState userState, T dialog)
         {
             
             _conversationState = conversationState;
             _userState = userState;
-
+            Dialog = dialog;
         }
 
         public override async Task OnTurnAsync(ITurnContext turnContext, CancellationToken cancellationToken = default(CancellationToken))
@@ -58,8 +58,9 @@ namespace GammaBot.Bots
                     // Acknowledge that we got their name.
                     await turnContext.SendActivityAsync($"Nice to meet you {userProfile.Name}!");
                     // Reset the flag to allow the bot to go through the cycle again.
-                    await SendMenuOptionsAsync(turnContext, cancellationToken);
                     conversationData.PromptedUserForName = false;
+
+                    await Dialog.RunAsync(turnContext,_conversationState.CreateProperty<DialogState>(nameof(DialogState)), cancellationToken);
                 }
                 else
                 {
@@ -72,33 +73,35 @@ namespace GammaBot.Bots
             }
             else
             {
-                // Set state to menu so that all responses validate menu dialog only
-                // User response within the menu dialog
-                string userResponse = turnContext.Activity.Text.ToLower();
+                await Dialog.RunAsync(turnContext, _conversationState.CreateProperty<DialogState>(nameof(DialogState)), cancellationToken);
 
-                // Validate menu selection input
-                switch (userResponse)
-                {
-                    case "telecom glossary":
-                        await turnContext.SendActivityAsync($"You chose Telecom Glossary.");
-                        break;  
-                    case "system support":
-                        await turnContext.SendActivityAsync($"You chose System Support.");
-                        break;
-                    case "support availability":
-                        await turnContext.SendActivityAsync($"You chose Support Availability.");
-                        break;
-                    case "ticketing":
-                        await turnContext.SendActivityAsync($"You chose Ticketing.");
-                        break;
-                    case "send feedback":
-                        await turnContext.SendActivityAsync($"You chose Feedback.");
-                        break;
-                    default:
-                        await turnContext.SendActivityAsync($"Sorry, I didn't understand your option!");
-                        await SendMenuOptionsAsync(turnContext, cancellationToken);
-                        break;
-                }
+                //// Set state to menu so that all responses validate menu dialog only
+                //// User response within the menu dialog
+                //string userResponse = turnContext.Activity.Text.ToLower();
+
+                //// Validate menu selection input
+                //switch (userResponse)
+                //{
+                //    case "telecom glossary":
+                //        await turnContext.SendActivityAsync($"You chose Telecom Glossary.");
+                //        break;  
+                //    case "system support":
+                //        await turnContext.SendActivityAsync($"You chose System Support.");
+                //        break;
+                //    case "support availability":
+                //        await turnContext.SendActivityAsync($"You chose Support Availability.");
+                //        break;
+                //    case "ticketing":
+                //        await turnContext.SendActivityAsync($"You chose Ticketing.");
+                //        break;
+                //    case "send feedback":
+                //        await turnContext.SendActivityAsync($"You chose Feedback.");
+                //        break;
+                //    default:
+                //        await turnContext.SendActivityAsync($"Sorry, I didn't understand your option!");
+                //        await SendMenuOptionsAsync(turnContext, cancellationToken);
+                //        break;
+                //}
             }
         }
 

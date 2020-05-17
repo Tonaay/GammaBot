@@ -12279,19 +12279,23 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\User1\\.nuget\\packages\\": {}
+    "C:\\Users\\Tvan\\.nuget\\packages\\": {},
+    "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\User1\\Desktop\\TestBot\\TestBot\\TestBot\\TestBot.csproj",
+      "projectUniqueName": "D:\\Software Development\\GitHub\\GammaBot\\TestBot\\TestBot\\TestBot.csproj",
       "projectName": "TestBot",
-      "projectPath": "C:\\Users\\User1\\Desktop\\TestBot\\TestBot\\TestBot\\TestBot.csproj",
-      "packagesPath": "C:\\Users\\User1\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\User1\\Desktop\\TestBot\\TestBot\\TestBot\\obj\\",
+      "projectPath": "D:\\Software Development\\GitHub\\GammaBot\\TestBot\\TestBot\\TestBot.csproj",
+      "packagesPath": "C:\\Users\\Tvan\\.nuget\\packages\\",
+      "outputPath": "D:\\Software Development\\GitHub\\GammaBot\\TestBot\\TestBot\\obj\\",
       "projectStyle": "PackageReference",
+      "fallbackFolders": [
+        "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+      ],
       "configFilePaths": [
-        "C:\\Users\\User1\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\Tvan\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -12326,23 +12330,16 @@
             "version": "[4.7.0, )"
           },
           "Microsoft.NETCore.App": {
-            "suppressParent": "All",
             "target": "Package",
             "version": "[2.1.0, )",
             "autoReferenced": true
           }
         },
         "imports": [
-          "net461",
-          "net462",
-          "net47",
-          "net471",
-          "net472",
-          "net48"
+          "net461"
         ],
         "assetTargetFallback": true,
-        "warn": true,
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.201\\RuntimeIdentifierGraph.json"
+        "warn": true
       }
     }
   }

@@ -34,7 +34,7 @@ namespace GammaBot
             services.AddSingleton<IBotFrameworkHttpAdapter, AdapterWithErrorHandler>();
 
             // Create the bot as a transient. In this case the ASP Controller is expecting an IBot.
-            services.AddTransient<IBot, SupportBot>();
+            services.AddTransient<IBot, SupportBot<MenuDialog>>();
 
             //-------------------------------------------------------------------
 
@@ -60,6 +60,9 @@ namespace GammaBot
             // Create the Conversation state passing in the storage layer
             var conversationState = new ConversationState(storage);
             services.AddSingleton(conversationState);
+
+            // The Dialog that will be run by the bot.
+            services.AddSingleton<MenuDialog>();
 
         }
 

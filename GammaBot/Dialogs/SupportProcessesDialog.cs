@@ -8,5 +8,6 @@ namespace GammaBot.Dialogs
 {
     public class SupportProcessesDialog: ComponentDialog
     {
+
     }
 }
