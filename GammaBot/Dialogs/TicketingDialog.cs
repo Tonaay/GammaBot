@@ -14,6 +14,10 @@ namespace GammaBot.Dialogs
 {
     public class TicketingDialog: ComponentDialog
     {
+        private string[] _menuOptions = new string[]
+        {
+                "How to create a ticket", "How to update a ticket", "How to close a ticket", "Quit",
+        };
 
         public TicketingDialog() : base(nameof(TicketingDialog))
         {
@@ -33,13 +37,8 @@ namespace GammaBot.Dialogs
 
         }
 
-        private static async Task<DialogTurnResult> ChoiceStepAsync(WaterfallStepContext stepContext, CancellationToken cancellationToken)
+        private async Task<DialogTurnResult> ChoiceStepAsync(WaterfallStepContext stepContext, CancellationToken cancellationToken)
         {
-            string[] _menuOptions = new string[]
-{
-                "How to create a ticket", "How to update a ticket", "How to close a ticket", "Finish",
-};
-
             var promptOptions = new PromptOptions
             {
                 Prompt = MessageFactory.Text("Please select an option:"),

@@ -9,6 +9,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using GammaBot.Dialogs;
 using Microsoft.Bot.Builder;
+using Microsoft.Bot.Builder.AI.QnA;
 using Microsoft.Bot.Builder.Dialogs;
 using Microsoft.Bot.Schema;
 
@@ -22,7 +23,7 @@ namespace GammaBot.Bots
 
         public SupportBot(ConversationState conversationState, UserState userState, T dialog)
         {
-            
+
             _conversationState = conversationState;
             _userState = userState;
             Dialog = dialog;
@@ -75,33 +76,6 @@ namespace GammaBot.Bots
             {
                 await Dialog.RunAsync(turnContext, _conversationState.CreateProperty<DialogState>(nameof(DialogState)), cancellationToken);
 
-                //// Set state to menu so that all responses validate menu dialog only
-                //// User response within the menu dialog
-                //string userResponse = turnContext.Activity.Text.ToLower();
-
-                //// Validate menu selection input
-                //switch (userResponse)
-                //{
-                //    case "telecom glossary":
-                //        await turnContext.SendActivityAsync($"You chose Telecom Glossary.");
-                //        break;  
-                //    case "system support":
-                //        await turnContext.SendActivityAsync($"You chose System Support.");
-                //        break;
-                //    case "support availability":
-                //        await turnContext.SendActivityAsync($"You chose Support Availability.");
-                //        break;
-                //    case "ticketing":
-                //        await turnContext.SendActivityAsync($"You chose Ticketing.");
-                //        break;
-                //    case "send feedback":
-                //        await turnContext.SendActivityAsync($"You chose Feedback.");
-                //        break;
-                //    default:
-                //        await turnContext.SendActivityAsync($"Sorry, I didn't understand your option!");
-                //        await SendMenuOptionsAsync(turnContext, cancellationToken);
-                //        break;
-                //}
             }
         }
 
@@ -123,32 +97,6 @@ namespace GammaBot.Bots
                     await turnContext.SendActivityAsync($"Hi there, I'm the Gamma Chatbot.", cancellationToken: cancellationToken);
                 }
             }
-        }
-
-        private static async Task SendMenuOptionsAsync(ITurnContext turnContext, CancellationToken cancellationToken)
-        {
-
-            var menuPrompt = MessageFactory.Text("Please select an option:\n\n1 - Telecom Glossary\n\n2 - System Support\n\n3 - Support Availability\n\n4 - Ticketing\n\n5 - Send Feedback");
-
-            menuPrompt.SuggestedActions = new SuggestedActions()
-            {
-                Actions = new List<CardAction>()
-                {
-                    new CardAction() { Title = "Telecom Glossary", Type = ActionTypes.ImBack, Value = "Telecom Glossary" },
-                    new CardAction() { Title = "System Support", Type = ActionTypes.ImBack, Value = "System Support" },
-                    new CardAction() { Title = "Support Availablity", Type = ActionTypes.ImBack, Value = "Support Availability" },
-                    new CardAction() { Title = "Ticketing", Type = ActionTypes.ImBack, Value = "Ticketing" },
-                    new CardAction() { Title = "Send FeedBack", Type = ActionTypes.ImBack, Value = "Send Feedback" },
-                },
-            };
-
-            await turnContext.SendActivitiesAsync(
-                    new Activity[] {
-                new Activity { Type = ActivityTypes.Typing },
-                new Activity { Type = "delay", Value= 2000 },
-                menuPrompt,
-                    },
-                    cancellationToken);
         }
     }
 }

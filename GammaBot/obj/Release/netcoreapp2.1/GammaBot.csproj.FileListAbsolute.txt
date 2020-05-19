@@ -1,0 +1,14 @@
+D:\Software Development\GitHub\GammaBot\GammaBot\bin\Release\netcoreapp2.1\appsettings.json
+D:\Software Development\GitHub\GammaBot\GammaBot\bin\Release\netcoreapp2.1\GammaBot.deps.json
+D:\Software Development\GitHub\GammaBot\GammaBot\bin\Release\netcoreapp2.1\GammaBot.runtimeconfig.json
+D:\Software Development\GitHub\GammaBot\GammaBot\bin\Release\netcoreapp2.1\GammaBot.runtimeconfig.dev.json
+D:\Software Development\GitHub\GammaBot\GammaBot\bin\Release\netcoreapp2.1\GammaBot.dll
+D:\Software Development\GitHub\GammaBot\GammaBot\bin\Release\netcoreapp2.1\GammaBot.pdb
+D:\Software Development\GitHub\GammaBot\GammaBot\obj\Release\netcoreapp2.1\GammaBot.csproj.CoreCompileInputs.cache
+D:\Software Development\GitHub\GammaBot\GammaBot\obj\Release\netcoreapp2.1\GammaBot.RazorAssemblyInfo.cache
+D:\Software Development\GitHub\GammaBot\GammaBot\obj\Release\netcoreapp2.1\GammaBot.RazorAssemblyInfo.cs
+D:\Software Development\GitHub\GammaBot\GammaBot\obj\Release\netcoreapp2.1\GammaBot.AssemblyInfoInputs.cache
+D:\Software Development\GitHub\GammaBot\GammaBot\obj\Release\netcoreapp2.1\GammaBot.AssemblyInfo.cs
+D:\Software Development\GitHub\GammaBot\GammaBot\obj\Release\netcoreapp2.1\GammaBot.RazorTargetAssemblyInfo.cache
+D:\Software Development\GitHub\GammaBot\GammaBot\obj\Release\netcoreapp2.1\GammaBot.dll
+D:\Software Development\GitHub\GammaBot\GammaBot\obj\Release\netcoreapp2.1\GammaBot.pdb

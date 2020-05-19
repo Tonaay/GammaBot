@@ -41,7 +41,6 @@ D:\Software Development\GitHub\GammaBot\GammaBot\bin\Debug\netcoreapp2.1\GammaBo
 D:\Software Development\GitHub\GammaBot\GammaBot\bin\Debug\netcoreapp2.1\GammaBot.runtimeconfig.dev.json
 D:\Software Development\GitHub\GammaBot\GammaBot\bin\Debug\netcoreapp2.1\GammaBot.dll
 D:\Software Development\GitHub\GammaBot\GammaBot\bin\Debug\netcoreapp2.1\GammaBot.pdb
-D:\Software Development\GitHub\GammaBot\GammaBot\obj\Debug\netcoreapp2.1\GammaBot.csprojAssemblyReference.cache
 D:\Software Development\GitHub\GammaBot\GammaBot\obj\Debug\netcoreapp2.1\GammaBot.csproj.CoreCompileInputs.cache
 D:\Software Development\GitHub\GammaBot\GammaBot\obj\Debug\netcoreapp2.1\GammaBot.RazorAssemblyInfo.cache
 D:\Software Development\GitHub\GammaBot\GammaBot\obj\Debug\netcoreapp2.1\GammaBot.RazorAssemblyInfo.cs
@@ -50,3 +49,4 @@ D:\Software Development\GitHub\GammaBot\GammaBot\obj\Debug\netcoreapp2.1\GammaBo
 D:\Software Development\GitHub\GammaBot\GammaBot\obj\Debug\netcoreapp2.1\GammaBot.RazorTargetAssemblyInfo.cache
 D:\Software Development\GitHub\GammaBot\GammaBot\obj\Debug\netcoreapp2.1\GammaBot.dll
 D:\Software Development\GitHub\GammaBot\GammaBot\obj\Debug\netcoreapp2.1\GammaBot.pdb
+D:\Software Development\GitHub\GammaBot\GammaBot\obj\Debug\netcoreapp2.1\GammaBot.csprojAssemblyReference.cache

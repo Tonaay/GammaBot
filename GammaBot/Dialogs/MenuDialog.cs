@@ -7,20 +7,36 @@ using System.Threading.Tasks;
 using System.Threading;
 using Microsoft.Bot.Builder.Dialogs.Choices;
 using Microsoft.Bot.Schema;
+using Microsoft.Bot.Builder.AI.QnA;
 
 namespace GammaBot.Dialogs
 {
     public class MenuDialog : ComponentDialog
     {
-        private UserState _userState;
+        
+        private readonly UserState _userState;
 
-        public MenuDialog(UserState userState) : base(nameof(MenuDialog))
+        private string[] menuOptions = new string[]
+        {
+                "Telecom Glossary", "System Support", "Support Availability", "Ticketing", "Send Feedback", "Quit", "Data"
+        };
+
+        public MenuDialog(UserState userState, QnAMakerEndpoint endpoint) : base(nameof(MenuDialog))
         {
             _userState = userState;
 
-            //AddDialog(new SupportGlossaryDialog());
+            var SupportProcessesEndpoint = new QnAMakerEndpoint
+            {
+                KnowledgeBaseId = "0b9d610f-fe1d-4fb3-a8f7-73bba69098fd",
+                EndpointKey = "139c19bb-77e0-4af6-81ca-180d67f25930",
+                Host = "https://gammaqnamaker.azurewebsites.net/qnamaker"
+            };
 
+            AddDialog(new SupportGlossaryDialog(endpoint));
+            AddDialog(new SupportProcessesDialog(SupportProcessesEndpoint));
+            AddDialog(new SupportRotaDialog());
             AddDialog(new TicketingDialog());
+            AddDialog(new FeedbackDialog(userState));
 
             AddDialog(new ChoicePrompt(nameof(ChoicePrompt)));
 
@@ -40,17 +56,13 @@ namespace GammaBot.Dialogs
 
         }
 
-        private static async Task<DialogTurnResult> QuestionStepAsync(WaterfallStepContext stepContext, CancellationToken cancellationToken)
+        private async Task<DialogTurnResult> QuestionStepAsync(WaterfallStepContext stepContext, CancellationToken cancellationToken)
         {
-            string[] _menuOptions = new string[]
-            {
-                "Telecom Glossary", "System Support", "Support Availability", "Ticketing", "Send Feedback", "Quit",
-            };
 
             var promptOptions = new PromptOptions { Prompt = MessageFactory.Text("Please select an option:" +
-                "\n\n1 - Telecom Glossary\n\n2 - System Support\n\n3 - Support Availability\n\n4 - Ticketing\n\n5 - Send Feedback\n\n6 - Quit"),
-                RetryPrompt = MessageFactory.Text("Reselect a menu choice"),
-                Choices = ChoiceFactory.ToChoices(_menuOptions),
+                "\n\n1 - Telecom Glossary\n\n2 - System Support\n\n3 - Support Availability\n\n4 - Ticketing\n\n5 - Send Feedback\n\n6 - Quit\n\n7 - Data"),
+                RetryPrompt = MessageFactory.Text("Please reselect a menu choice"),
+                Choices = ChoiceFactory.ToChoices(menuOptions),
             };
 
             // Ask the user to select menu option.
@@ -58,7 +70,7 @@ namespace GammaBot.Dialogs
 
         }
 
-        private static async Task<DialogTurnResult> ChoiceStepAsync(WaterfallStepContext stepContext, CancellationToken cancellationToken)
+        private async Task<DialogTurnResult> ChoiceStepAsync(WaterfallStepContext stepContext, CancellationToken cancellationToken)
         {
             stepContext.Values["choice"] = ((FoundChoice)stepContext.Result).Value;
             var choice = stepContext.Values["choice"].ToString().ToLower();
@@ -66,32 +78,47 @@ namespace GammaBot.Dialogs
             if (choice == "1" || choice == "telecom glossary")
             {
                 await stepContext.Context.SendActivityAsync(MessageFactory.Text("You chose Telecom Glossary"));
-                return await stepContext.ReplaceDialogAsync(nameof(MenuDialog), null, cancellationToken);
+                return await stepContext.BeginDialogAsync(nameof(SupportGlossaryDialog), null, cancellationToken);
             }
             else if (choice == "2" || choice == "system support")
             {
                 await stepContext.Context.SendActivityAsync(MessageFactory.Text("You chose System Support"));
-                return await stepContext.ReplaceDialogAsync(nameof(MenuDialog), null, cancellationToken);
+                return await stepContext.BeginDialogAsync(nameof(SupportProcessesDialog), null, cancellationToken);
             }
             else if (choice == "3" || choice == "support availability")
             {
-                await stepContext.Context.SendActivityAsync(MessageFactory.Text("You chose Support Availability"));
-                return await stepContext.ReplaceDialogAsync(nameof(MenuDialog), null, cancellationToken);
+                return await stepContext.BeginDialogAsync(nameof(SupportRotaDialog), null, cancellationToken);
+
             }
             else if (choice == "4" || choice == "ticketing")
             {
-                await stepContext.Context.SendActivityAsync(MessageFactory.Text("You chose Ticketing"));
                 return await stepContext.BeginDialogAsync(nameof(TicketingDialog), null, cancellationToken);
 
             }
             else if (choice == "5" || choice == "send feedback")
             {
                 await stepContext.Context.SendActivityAsync(MessageFactory.Text("You chose Send Feedback"));
-                return await stepContext.ReplaceDialogAsync(nameof(MenuDialog), null, cancellationToken);
+                return await stepContext.BeginDialogAsync(nameof(FeedbackDialog), null, cancellationToken);
+
             }
             else if (choice == "6" || choice == "quit")
             {
-                return await stepContext.NextAsync(stepContext,cancellationToken);
+                await stepContext.Context.SendActivityAsync(MessageFactory.Text("Thanks for using GammaBot! Type anything to reopen the menu!"));
+
+                return await stepContext.EndDialogAsync(null, cancellationToken);
+            }
+            else if (choice == "7" || choice == "data")
+            {
+                var accessor = _userState.CreateProperty<FeedbackState>(nameof(FeedbackState));
+
+                var feedbackResults = await accessor.GetAsync(stepContext.Context, () => new FeedbackState(), cancellationToken);
+
+                await stepContext.Context.SendActivityAsync(MessageFactory.Text("Feedback Dialog:\n\n" +
+                    "Rating: " + feedbackResults.Rating.ToString() + "\n" +
+                    "Note: " + feedbackResults.Notes));
+
+                return await stepContext.ReplaceDialogAsync(nameof(MenuDialog), null, cancellationToken);
+
             }
             else {
                 return await stepContext.ReplaceDialogAsync(nameof(MenuDialog), null, cancellationToken);
@@ -100,6 +127,7 @@ namespace GammaBot.Dialogs
 
         private static async Task<DialogTurnResult> ConfirmationStepAsync(WaterfallStepContext stepContext, CancellationToken cancellationToken)
         {
+
             var messageText = $"Would you like to return to the menu?";
             var promptMessage = MessageFactory.Text(messageText, messageText, InputHints.ExpectingInput);
 
