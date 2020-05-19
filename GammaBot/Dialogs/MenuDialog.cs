@@ -59,8 +59,9 @@ namespace GammaBot.Dialogs
         private async Task<DialogTurnResult> QuestionStepAsync(WaterfallStepContext stepContext, CancellationToken cancellationToken)
         {
 
-            var promptOptions = new PromptOptions { Prompt = MessageFactory.Text("Please select an option:" +
-                "\n\n1 - Telecom Glossary\n\n2 - System Support\n\n3 - Support Availability\n\n4 - Ticketing\n\n5 - Send Feedback\n\n6 - Quit\n\n7 - Data"),
+            var promptOptions = new PromptOptions { Prompt = MessageFactory.Text("Please select an option:"),
+            //var promptOptions = new PromptOptions { Prompt = MessageFactory.Text("Please select an option:" +
+                //"\n\n1 - Telecom Glossary\n\n2 - System Support\n\n3 - Support Availability\n\n4 - Ticketing\n\n5 - Send Feedback\n\n6 - Quit\n\n7 - Data"),
                 RetryPrompt = MessageFactory.Text("Please reselect a menu choice"),
                 Choices = ChoiceFactory.ToChoices(menuOptions),
             };

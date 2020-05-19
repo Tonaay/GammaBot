@@ -12,3 +12,5 @@ D:\Software Development\GitHub\GammaBot\GammaBot\obj\Release\netcoreapp2.1\Gamma
 D:\Software Development\GitHub\GammaBot\GammaBot\obj\Release\netcoreapp2.1\GammaBot.RazorTargetAssemblyInfo.cache
 D:\Software Development\GitHub\GammaBot\GammaBot\obj\Release\netcoreapp2.1\GammaBot.dll
 D:\Software Development\GitHub\GammaBot\GammaBot\obj\Release\netcoreapp2.1\GammaBot.pdb
+D:\Software Development\GitHub\GammaBot\GammaBot\obj\Release\netcoreapp2.1\GammaBot.csprojAssemblyReference.cache
+D:\Software Development\GitHub\GammaBot\GammaBot\obj\Release\netcoreapp2.1\UserSecretsAssemblyInfo.cs

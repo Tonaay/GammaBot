@@ -39,7 +39,7 @@ namespace GammaBot.Dialogs
         {
             stepContext.Values[FeedbackInfo] = new FeedbackState();
 
-            var promptOptions = new PromptOptions { Prompt = MessageFactory.Text("Please enter a rating (1: lowest, 10: highest).") };
+            var promptOptions = new PromptOptions { Prompt = MessageFactory.Text("Please enter a rating of how useful you found this chatbot (1: lowest, 10: highest).") };
             return await stepContext.PromptAsync(nameof(NumberPrompt<int>), promptOptions, cancellationToken);
         }
 
