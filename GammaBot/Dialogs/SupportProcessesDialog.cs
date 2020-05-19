@@ -36,7 +36,7 @@ namespace GammaBot.Dialogs
 
             var promptOptions = new PromptOptions
             {
-                Prompt = MessageFactory.Text("How can I help you? - E.g. I'm have and issue with the CRM System (Type 'quit' to finish)")
+                Prompt = MessageFactory.Text("How can I help you? - E.g. I have and issue with the CRM System (Type 'quit' to finish)")
             };
             return await stepContext.PromptAsync(nameof(TextPrompt), promptOptions, cancellationToken);
 

@@ -68,6 +68,7 @@ namespace GammaBot.Dialogs
                     "If left blank the ticket will be automatically assigned to the provisioning queue.\n\n" +
                     "Otherwise, select the appropriate team and click the submit button when you are finished"); ;
                 step.Attachments = new List<Attachment>() { GetCreate3Attachment() };
+                await stepContext.Context.SendActivityAsync(step, cancellationToken);
                 return await stepContext.ReplaceDialogAsync(nameof(TicketingDialog), null, cancellationToken);
 
             }
@@ -94,7 +95,7 @@ namespace GammaBot.Dialogs
                 await stepContext.Context.SendActivityAsync(step3, cancellationToken);
                 return await stepContext.ReplaceDialogAsync(nameof(TicketingDialog), null, cancellationToken);
             }
-            else if (choice == "4" || choice == "finish")
+            else if (choice == "4" || choice == "quit")
             {
 
                 return await stepContext.NextAsync(stepContext, cancellationToken);
