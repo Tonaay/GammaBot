@@ -10,7 +10,7 @@ using Microsoft.Bot.Builder;
 using Microsoft.Bot.Builder.Integration.AspNet.Core;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-
+using Microsoft.Bot.Builder.AI.QnA;
 using GammaBot.Bots;
 using GammaBot.Dialogs;
 
@@ -63,6 +63,13 @@ namespace GammaBot
 
             // The Dialog that will be run by the bot.
             services.AddSingleton<MenuDialog>();
+
+            services.AddSingleton(new QnAMakerEndpoint
+            {
+                KnowledgeBaseId = Configuration.GetValue<string>($"QnAKnowledgebaseId"),
+                EndpointKey = Configuration.GetValue<string>($"QnAAuthKey"),
+                Host = Configuration.GetValue<string>($"QnAEndpointHostName")
+            });
 
         }
 
